@@ -1,6 +1,6 @@
 /**
  * Restful Resources service for AngularJS apps
- * @version v1.2.1 - 2013-12-15
+ * @version v1.2.2 - 2013-12-16
  * @link https://github.com/mgonto/restangular
  * @author Martin Gontovnikas <martin@gonto.com.ar>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -981,6 +981,7 @@ module.provider('Restangular', function() {
                       whatFetched, url, headers || {}, reqParams || {}, this[config.restangularFields.httpConfig] || {});
 
                   var filledArray = [];
+                  filledArray     = config.transformElem(filledArray, true, whatFetched, service)
 
                   urlHandler.resource(this, $http, request.httpConfig, request.headers, request.params, what,
                           this[config.restangularFields.etag], operation).getList().then(function(response) {
@@ -1035,6 +1036,8 @@ module.provider('Restangular', function() {
                     headers || {}, resParams || {}, this[config.restangularFields.httpConfig] || {});
 
                   var filledObject = {};
+                  filledObject = config.transformElem(filledObject, false, route, service)
+
 
                   var okCallback = function(response) {
                       var resData = response.data;
