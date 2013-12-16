@@ -974,6 +974,7 @@ module.provider('Restangular', function() {
                       whatFetched, url, headers || {}, reqParams || {}, this[config.restangularFields.httpConfig] || {});
 
                   var filledArray = [];
+                  filledArray     = config.transformElem(filledArray, true, whatFetched, service)
 
                   urlHandler.resource(this, $http, request.httpConfig, request.headers, request.params, what,
                           this[config.restangularFields.etag], operation).getList().then(function(response) {
@@ -1028,6 +1029,8 @@ module.provider('Restangular', function() {
                     headers || {}, resParams || {}, this[config.restangularFields.httpConfig] || {});
 
                   var filledObject = {};
+                  filledObject = config.transformElem(filledObject, false, route, service)
+
 
                   var okCallback = function(response) {
                       var resData = response.data;
